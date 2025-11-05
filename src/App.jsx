@@ -251,7 +251,7 @@ const AboutSection = () => (
                 {/* Column 2: Founder Portrait */}
                 <div className="flex justify-center lg:justify-end">
                     <img 
-                        src="/founder-portrait.png" 
+                        src="/alex.png" 
                         alt="Alexander Muchemi Muthee"
                         className="w-full max-w-md rounded-lg"
                         onError="this.src='https://placehold.co/600x600/1e293b/eab308?text=Image+Not+Found'"
