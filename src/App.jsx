@@ -139,7 +139,7 @@ const Header = () => {
                         {/* Logo Image */}
                         <img
                             className="block h-12 w-auto"
-                            src="/logo.png"
+                            src="/logo.png.png"
                             alt="A. Muchemi Muthee & Co. Advocates logo"
                         />
                         {/* Firm Name Text */}
@@ -279,7 +279,7 @@ const AboutSection = () => (
                 {/* Column 2: Founder Portrait */}
                 <div className="flex justify-center lg:justify-end">
                     <img 
-                        src="/founder-portrait.png" 
+                        src="/alex.png" 
                         alt="Alexander Muchemi Muthee"
                         className="w-full max-w-md rounded-lg"
                         onError="this.src='https://placehold.co/600x600/1e293b/eab308?text=Image+Not+Found'"
@@ -828,7 +828,7 @@ const Footer = () => (
                     <a href="#home" className="flex-shrink-0 flex items-center">
                         <img
                             className="block h-12 w-auto"
-                            src="/logo.png"
+                            src="/logo.png.png"
                             alt="A. Muchemi Muthee & Co. Advocates logo"
                         />
                         <div className="ml-3">
