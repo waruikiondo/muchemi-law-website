@@ -108,7 +108,7 @@ const Header = () => {
 <a href="#home" className="flex-shrink-0 flex items-center">
     <img
         className="block h-14 w-auto"  /* You can adjust h-14 (3.5rem) if it's too big or small */
-        src="/logo.png"
+        src="/logo.png.png"
         alt="A. Muchemi Muthee & Co. Advocates logo"
     />
 </a>
