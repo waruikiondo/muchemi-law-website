@@ -330,6 +330,9 @@ const PracticeAreasSection = () => {
 /**
  * Our Team Section
  */
+/**
+ * Our Team Section
+ */
 const TeamSection = () => (
     <section id="team" className="py-16 sm:py-24 bg-slate-900">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -341,11 +344,11 @@ const TeamSection = () => (
                 </p>
             </div>
             
+            {/* Legal Team */}
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
                 {/* Team Member 1 */}
                 <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
                     <div className="sm:flex-shrink-0">
-                        {/* THIS IS THE FIX: object-contain */}
                         <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
                              src="/muchemi.png" 
                              alt="Alexander Muchemi Muthee"
@@ -359,14 +362,13 @@ const TeamSection = () => (
                         </p>
                         <p className="mt-3 text-base text-slate-400">
                             Extensive experience in private practice and as a pioneer County Attorney for Laikipia County. Member of the LSK and Amnesty International.
-                        </p> {/* <--- THIS IS THE TYPO FIX */}
+                        </p>
                     </div>
                 </Card>
                 
                 {/* Team Member 2 */}
                 <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
                     <div className="sm:flex-shrink-0">
-                        {/* THIS IS THE FIX: object-contain */}
                         <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
                              src="/mose.png" 
                              alt="Emmanuel Moses Wachira Muthee"
@@ -384,6 +386,41 @@ const TeamSection = () => (
                     </div>
                 </Card>
             </div>
+
+            {/* NEW: Firm Administration Section */}
+            <div className="mt-24">
+                <div className="text-center">
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Firm Administration</h2>
+                    <p className="mt-4 max-w-2xl mx-auto text-xl text-slate-300">
+                        The operational backbone of our firm, ensuring a seamless client experience.
+                    </p>
+                </div>
+
+                <div className="mt-16 flex justify-center">
+                    <div className="max-w-4xl w-full">
+                        <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
+                            <div className="sm:flex-shrink-0">
+                                {/* Placeholder Image */}
+                                <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto bg-slate-700"
+                                     src="https://placehold.co/400x400/1e293b/eab308?text=F.W." 
+                                     alt="Faith Wanjiku"
+                                />
+                            </div>
+                            <div className="flex-1">
+                                <h3 className="text-2xl font-bold text-white">Faith Wanjiku</h3>
+                                <p className="text-lg font-medium text-amber-500">Firm Administrator</p>
+                                <p className="mt-4 text-base text-slate-300">
+                                    Faith is the operational backbone of A. Muchemi Muthee & Co. Advocates. As the Firm Administrator, she manages all day-to-day operations, client relations, and administrative support.
+                                </p>
+                                <p className="mt-3 text-base text-slate-400">
+                                    Her dedication and organizational skills ensure our entire team can focus on delivering exceptional legal service, making her a vital part of the firm's efficiency and a primary point of contact for our clients.
+                                </p>
+                            </div>
+                        </Card>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </section>
 );
