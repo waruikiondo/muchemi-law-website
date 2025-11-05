@@ -225,7 +225,7 @@ const HeroSection = () => (
                 className="w-full h-full object-cover" 
                 src="/nairobi-skyline.jpg"
                 alt="Nairobi skyline at night"
-                onError="this.src='https://placehold.co/1920x1080/0f172a/eab308?text=Image+Not+Found'"
+                onError="this.src='[https://placehold.co/1920x1080/0f172a/eab308?text=Image+Not+Found](https://placehold.co/1920x1080/0f172a/eab308?text=Image+Not+Found)'"
             />
             {/* This is the dark overlay to make text readable */}
             <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
@@ -240,8 +240,9 @@ const HeroSection = () => (
                 <p className="mt-4 text-xl sm:text-2xl font-medium text-slate-300">
                     "Res ipsa loquitur." <span className="italic text-lg">(The thing speaks for itself)</span>
                 </p>
+                {/* --- UPDATED TEXT --- */}
                 <p className="mt-6 text-lg text-slate-300 max-w-lg">
-                    We provide unwavering professional guidance, grounded in integrity and expertise, to deliver expeditious, cost-effective, and client-centered solutions.
+                    You have a right to proper representation.
                 </p>
                 <div className="mt-10 flex flex-col sm:flex-row sm:items-center gap-4">
                     <Button onClick={() => window.location.href = '#contact'} size="lg">
@@ -268,11 +269,9 @@ const AboutSection = () => (
                 {/* Column 1: Text Content */}
                 <div className="text-left">
                     <h2 className="text-base font-semibold text-amber-500 tracking-wide uppercase">Our Firm</h2>
-                    <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Our Commitment to You</p>
+                    <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">We are a law firm that offers exceptional legal services.</p>
+                    {/* --- UPDATED TEXT --- */}
                     <p className="mt-4 max-w-2xl text-xl text-slate-300">
-                        Founded on a mission to be a trusted legal partner, we are dedicated to addressing the diverse needs of our clients with precision and reliability.
-                    </p>
-                    <p className="mt-4 max-w-2xl text-lg text-slate-400">
                         The Firm seeks to offer professional, truthful and well-reasoned guidance to its clients with the only goal of ensuring expeditious, cost effective and client-based solutions.
                     </p>
                 </div>
@@ -283,27 +282,33 @@ const AboutSection = () => (
                         src="/founder-portrait.png" 
                         alt="Alexander Muchemi Muthee"
                         className="w-full max-w-md rounded-lg"
-                        onError="this.src='https://placehold.co/600x600/1e293b/eab308?text=Image+Not+Found'"
+                        onError="this.src='[https://placehold.co/600x600/1e293b/eab308?text=Image+Not+Found](https://placehold.co/600x600/1e293b/eab308?text=Image+Not+Found)'"
                     />
                 </div>
             </div>
 
-            {/* Values Section (with adjusted top margin) */}
-            <div className="mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                {[
-                    { title: 'Integrity', description: 'Upholding the highest ethical standards, ensuring transparency, honesty, and fairness.', icon: <CheckCircle className="h-6 w-6" /> },
-                    { title: 'Client-Centric', description: 'Our clients\' needs are at the core of our decision-making and requirements.', icon: <Users className="h-6 w-6" /> },
-                    { title: 'Collaboration', description: 'Working seamlessly with our clients to achieve shared goals and success.', icon: <Briefcase className="h-6 w-6" /> },
-                    { title: 'Professionalism', description: 'Maintaining a high level of professionalism in all interactions and diligence.', icon: <Scale className="h-6 w-6" /> }
-                ].map((item) => (
-                    <div key={item.title} className="text-center">
-                        <div className="flex items-center justify-center h-12 w-12 rounded-md bg-amber-500/10 text-amber-500 mx-auto">
-                            {item.icon}
+            {/* Values Section (with adjusted top margin and text) */}
+            <div className="mt-24">
+                <div className="text-center mb-16">
+                    <h2 className="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Our Values</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                    {/* --- UPDATED VALUES --- */}
+                    {[
+                        { title: 'Integrity', description: 'We uphold the highest ethical standards, ensuring transparency, honesty, and fairness in all our dealings.', icon: <Gem className="h-6 w-6" /> },
+                        { title: 'Client-Centric Approach', description: 'Our clients\' needs are at the core of our decision-making. We are committed to delivering solutions that prioritize and meet their unique requirements.', icon: <Users className="h-6 w-6" /> },
+                        { title: 'Collaboration', description: 'We believe in the power of collaboration, fostering a supportive and inclusive environment within our firm and working seamlessly with our clients to achieve shared goals.', icon: <Briefcase className="h-6 w-6" /> },
+                        { title: 'Professionalism', description: 'We maintain a high level of professionalism in all interactions, ensuring respect, courtesy, and diligence in our relationships with clients, colleagues, and the community.', icon: <Scale className="h-6 w-6" /> }
+                    ].map((item) => (
+                        <div key={item.title} className="text-center">
+                            <div className="flex items-center justify-center h-12 w-12 rounded-md bg-amber-500/10 text-amber-500 mx-auto">
+                                {item.icon}
+                            </div>
+                            <h3 className="mt-5 text-xl font-semibold text-white">{item.title}</h3>
+                            <p className="mt-2 text-base text-slate-400">{item.description}</p>
                         </div>
-                        <h3 className="mt-5 text-xl font-semibold text-white">{item.title}</h3>
-                        <p className="mt-2 text-base text-slate-400">{item.description}</p>
-                    </div>
-                ))}
+                    ))}
+                </div>
             </div>
         </div>
     </section>
@@ -464,7 +469,7 @@ const TeamSection = ({ onOpenBio }) => (
                             <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
                                  src="/muchemi.png" 
                                  alt="Alexander Muchemi Muthee"
-                                 onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"
+                                 onError="this.src='[https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found](https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found)'"
                             />
                         </div>
                         <div className="flex-1">
@@ -492,7 +497,7 @@ const TeamSection = ({ onOpenBio }) => (
                             <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
                                  src="/mose.png" 
                                  alt="Emmanuel Moses Wachira Muthee"
-                                 onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"
+                                 onError="this.src='[https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found](https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found)'"
                             />
                         </div>
                         <div className="flex-1">
@@ -530,7 +535,7 @@ const TeamSection = ({ onOpenBio }) => (
                                 <div className="sm:flex-shrink-0">
                                     {/* Placeholder Image */}
                                     <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto bg-slate-700"
-                                         src="https://placehold.co/400x400/1e293b/eab308?text=F.W." 
+                                         src="[https://placehold.co/400x400/1e293b/eab308?text=F.W](https://placehold.co/400x400/1e293b/eab308?text=F.W)." 
                                          alt="Faith Wanjiku"
                                     />
                                 </div>
@@ -568,21 +573,21 @@ const InsightsSection = () => {
             category: 'Commercial Law',
             title: 'Navigating the 2024 Kenyan Data Protection Act Amendments',
             description: 'The latest amendments introduce significant changes for businesses. We break down what you need to know to stay compliant.',
-            imgSrc: 'https://placehold.co/600x400/1e293b/eab308?text=Legal+Update',
+            imgSrc: '[https://placehold.co/600x400/1e293b/eab308?text=Legal+Update](https://placehold.co/600x400/1e293b/eab308?text=Legal+Update)',
             href: '#',
         },
         {
             category: 'Land Law',
             title: 'E-Conveyancing in Kenya: Progress and Pitfalls',
             description: 'The digitization of land transactions promises efficiency, but new challenges have emerged. Here is our expert analysis.',
-            imgSrc: 'https://placehold.co/600x400/1e293b/eab308?text=Property+Law',
+            imgSrc: '[https://placehold.co/600x400/1e293b/eab308?text=Property+Law](https://placehold.co/600x400/1e293b/eab308?text=Property+Law)',
             href: '#',
         },
         {
             category: 'Intellectual Property',
             title: 'Protecting Your Brand: A Guide to Trademarks in East Africa',
             description: 'Your brand is your most valuable asset. Learn the essential steps for trademark registration and protection in the EAC.',
-            imgSrc: 'https://placehold.co/600x400/1e293b/eab308?text=IP+Law',
+            imgSrc: '[https://placehold.co/600x400/1e293b/eab308?text=IP+Law](https://placehold.co/600x400/1e293b/eab308?text=IP+Law)',
             href: '#',
         },
     ];
@@ -604,7 +609,7 @@ const InsightsSection = () => {
                                 src={item.imgSrc} 
                                 alt={item.title} 
                                 className="rounded-t-xl h-48 w-full object-cover"
-                                onError="this.src='https://placehold.co/600x400/1e293b/eab308?text=Image+Not+Found'"
+                                onError="this.src='[https://placehold.co/600x400/1e293b/eab308?text=Image+Not+Found](https://placehold.co/600x400/1e293b/eab308?text=Image+Not+Found)'"
                             />
                             <CardHeader>
                                 <CardDescription className="text-amber-500 font-medium">{item.category}</CardDescription>
@@ -831,8 +836,9 @@ const Footer = () => (
                             <span className="block text-sm font-medium text-amber-500 -mt-1">& Co. Advocates</span>
                         </div>
                     </a>
+                    {/* --- UPDATED TEXT --- */}
                     <p className="mt-4 text-base">
-                        Commissioner for Oaths and Notary Public.
+                        A. Muchemi Muthee & Co. Advocates stands as a reliable legal partner with a pragmatic approach to providing legally sound yet client oriented and cost effective solutions to all legal challenges.
                     </p>
                     <p className="mt-2 text-base italic">
                         "Res ipsa loquitur."
@@ -866,7 +872,32 @@ const Footer = () => (
                             <span><a href="tel:+254722746293" className="hover:text-amber-500 transition-colors">+254 722 746 293</a></span>
                         </li>
                         <li className="flex gap-3">
-                            <Mail className="flex-shrink-0 h-6 w-6 text-amber-500/70" />
+                            <Mail className="flex-shrink-0 h-6 w-6 text-amber-500/7Remember the current time is Wednesday, November 5, 2025 at 3:01 PM EAT.
+
+Remember the current location is Nairobi, Nairobi County, Kenya.
+
+As a reminder, these are files that the user has uploaded or mentioned:
+{"contentFetchId":"uploaded:muchemilawprofile.pdf","fileMimeType":"application/pdf","fileName":"muchemilawprofile.pdf","fileNameIsCodeAccessible":true,"snippetFromBack":"...MMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nEmmanuel Moses Wachira Muthee - Associate.\n\nE.M. Wachira Muthee is a Kenyan Advocate admitted to the\n Roll of Advocates on the 22nd of November 2021. He holds an\n LLB (Hons) (Bachelor of Laws) from the University of Nairobi\n and is undertaking his LLM (Masters in Law) at the University\n of Nairobi, where he is majoring in Intellectual Property and\n Technology Law.\n\nHe is also an admitted Patent Agent with the Kenya Industrial\n Property Institute. He has been in active legal practice in\n various positions over the years. He has practiced litigation\n in various fields of the law including land disputes; family\n disputes, including divorce and child maintenance;\n constitutional petitions; commercial disputes; employment\n disputes and administrative law.\n\nHe is especially interested in Technology Transfer and\n Intellectual Property.\n\nEmmanuel Moses Wachira Muthee is a member of the Law\n Society of Kenya.\n\nFIRM PROFILE\n\nEWachira\n\nASSOCIATE.\n\n10\n\n\n--- PAGE 11 ---\n\n[Image 12]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nA. Muchemi Muthee & Co. Advocates stands as a reliable legal\n partner with a pragmatic approach to providing legally sound yet\n client oriented and cost effective solutions to all legal challenges\n\nFIRM PROFILE\n\n11\n\n\n--- PAGE 12 ---\n\nCONTACT\n US\n\n@info@muchemilaw.com\n\n+254 722 746 293\n +254 714 094 094\n\nwww.muchemilaw.com\n\nRoom T14,\n\nPremier...","snippetFromFront":"--- PAGE 1 ---\n\n[Image 1]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC.\n\nFIRM PROFILE\n\n\n--- PAGE 2 ---\n\nRes ipsa loquitur\n\nTHE THING SPEAKS FOR ITSELF.\n\nYou have a right to\n proper representation\n\n\n--- PAGE 3 ---\n\n[Image 2]\n\n[Image 3]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nFIRM PROFILE\n\nWe are a law firm that offers\n exceptional legal services.\n\nThe Firm seeks to offer\n professional, truthful and well-\n reasoned guidance to its clients\n with the only goal of ensuring\n expeditious, cost effective and\n client-based solutions.\n\n3\n\n\n--- PAGE 4 ---\n\n[Image 4]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nMission\n\nOur mission is to provide unwavering professional\n guidance, grounded in integrity and expertise.\n Drawing from our extensive experience, we are com-\n mitted to delivering expeditious, cost-effective, and\n client-centered solutions. We strive to be a trusted\n legal partner, dedicated to addressing the diverse\n needs of our clients with precision and reliability.\"\n\nVision\n\nTo be a leading force in the legal lands-\n cape, setting the standard for excellence\n\nand innovation. We envision a future\n where our firm is synonymous with legal\n expertise, known for our commitment to\n advancing client interests, and contribu-\n\nting positively to the legal profession\n and community. Through continuous\n growth and adaptation, we aim to be\n the go-to legal partner for those se..."}
+{"contentFetchId":"uploaded:App.jsx","fileMimeType":"text/jsx","fileName":"App.jsx","fileNameIsCodeAccessible":true,"snippetFromBack":"...                         <span><a href=\"mailto:info@muchemilaw.com\" className=\"hover:text-amber-500 transition-colors\">info@muchemilaw.com</a></span>\r\n                                </li>\r\n                            </ul>\r\n                        </div>\r\n                    </div>\r\n                    \r\n                    {/* Footer Bottom */}\r\n                    <div className=\"mt-12 border-t border-slate-800 pt-8 text-center\">\r\n                        <p className=\"text-base\">\r\n                            &copy; {new Date().getFullYear()} A. Muchemi Muthee & Co. Advocates. All Rights Reserved.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n            </footer>\r\n        );\r\n        \r\n        \r\n        /**\r\n         * Main App Component\r\n         */\r\n        export default function App() {\r\n            return (\r\n                <div className=\"bg-slate-900 text-slate-100 antialiased font-sans\">\r\n                    <Header />\r\n                    <main>\r\n                        <HeroSection />\r\n                        <AboutSection />\r\n                        <PracticeAreasSection />\r\n                        <TeamSection />\r\n                        <InsightsSection /> {/* Added */}\r\n                        <TestimonialsSection />\r\n                        <FaqSection /> {/* Added */}\r\n                        <ContactSection />\r\n                    </main>\r\n                    <Footer />\r\n                </div>\r\n            );\r\n        }","snippetFromFront":"import React, { useState } from 'react';\r\nimport { \r\n    Menu, X, Scale, Users, Briefcase, PenTool, Home, Vote, \r\n    Lightbulb, Building, MapPin, Phone, Mail, CheckCircle,\r\n    ArrowRight, ChevronDown\r\n} from 'lucide-react';\r\n\r\n// --- shadcn/ui-inspired Components (self-contained) ---\r\n// We define these helper components to easily reuse modern styles.\r\n\r\n/**\r\n * A modern, styled button component.\r\n */\r\nconst Button = React.forwardRef(({ className = '', variant = 'default', size = 'default', ...props }, ref) => {\r\n    const variants = {\r\n        default: 'bg-amber-500 text-slate-900 hover:bg-amber-400',\r\n        outline: 'border border-amber-500 text-amber-500 hover:bg-amber-500/10',\r\n        ghost: 'text-amber-500 hover:bg-amber-500/10',\r\n        link: 'text-amber-500 underline-offset-4 hover:underline',\r\n    };\r\n    const sizes = {\r\n        default: 'h-10 py-2 px-4',\r\n        sm: 'h-9 px-3 rounded-md',\r\n        lg: 'h-11 px-8 rounded-md',\r\n    };\r\n    return (\r\n        <button\r\n            className={`inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring..."}
+{"contentFetchId":"uploaded:image_2764bf.png-68d1346e-c005-4423-9de3-bbe30a026d7b","fileMimeType":"image/png","fileName":"image_2764bf.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_276845.png-8e064ec4-60f2-41ef-89e5-ac2cba96e595","fileMimeType":"image/png","fileName":"image_276845.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:imsogabriel-stock-KlMhH1sWckU-unsplash.jpg-54b9e5aa-5bb0-4aa2-8064-190d900c03ff","fileMimeType":"image/jpeg","fileName":"imsogabriel-stock-KlMhH1sWckU-unsplash.jpg","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:imsogabriel-stock-eeijZpKf2Kg-unsplash.jpg-25f51bef-bc27-49ce-81e0-2b4ead3d9037","fileMimeType":"image/jpeg","fileName":"imsogabriel-stock-eeijZpKf2Kg-unsplash.jpg","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:amm_logo-removebg-preview.png-8d9895fa-b00c-431a-a309-61236ce84c79","fileMimeType":"image/png","fileName":"amm_logo-removebg-preview.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_2845f9.png-68ec2209-be01-4da5-95ff-2ba13e2c5500","fileMimeType":"image/png","fileName":"image_2845f9.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_28493f.png-f9e8f1e8-4ce7-4603-be4b-d9a1b215ead4","fileMimeType":"image/png","fileName":"image_28493f.png","fileNameIsCodeAccessible":true}
+{"contentFetchId_org":"uploaded:image_28b589.png-751b3bd4-6ce5-46a7-8a4a-2b714923607d","fileMimeType_org":"image/png","fileName_org":"image_28b589.png","fileNameIsCodeAccessible_org":true}
+{"contentFetchId":"uploaded:alex.png-5d8650bd-1063-49b2-94d5-147f2e5bc22f","fileMimeType":"image/png","fileName":"alex.png","fileNameIsCodeAccessible":true}
+{"contentFetchId_org":"uploaded:alex.png-374be15b-7492-4e02-a33c-6943b9c5218c","fileMimeType_org":"image/png","fileName_org":"alex.png","fileNameIsCodeAccessible_org":true}
+{"contentFetchId_org":"uploaded:alex-removebg-preview.png-efd3a0fc-ca7a-4347-9da4-bbb591444cb4","fileMimeType_org":"image/png","fileName_org":"alex-removebg-preview.png","fileNameIsCodeAccessible_org":true}
+{"contentFetchId":"uploaded:image_299afe.png-2ecc332f-00f3-4633-a7ee-d648349faf4e","fileMimeType":"image/png","fileName":"image_299afe.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_29ad64.png-dff0fb92-725f-4296-9e43-c2b0ff894d27","fileMimeType":"image/png","fileName":"image_29ad64.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:muchemilawprofile.pdf","fileMimeType":"application/pdf","fileName":"muchemilawprofile.pdf","fileNameIsCodeAccessible":true,"snippetFromBack":"...MMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nEmmanuel Moses Wachira Muthee - Associate.\n\nE.M. Wachira Muthee is a Kenyan Advocate admitted to the\n Roll of Advocates on the 22nd of November 2021. He holds an\n LLB (Hons) (Bachelor of Laws) from the University of Nairobi\n and is undertaking his LLM (Masters in Law) at the University\n of Nairobi, where he is majoring in Intellectual Property and\n Technology Law.\n\nHe is also an admitted Patent Agent with the Kenya Industrial\n Property Institute. He has been in active legal practice in\n various positions over the years. He has practiced litigation\n in various fields of the law including land disputes; family\n disputes, including divorce and child maintenance;\n constitutional petitions; commercial disputes; employment\n disputes and administrative law.\n\nHe is especially interested in Technology Transfer and\n Intellectual Property.\n\nEmmanuel Moses Wachira Muthee is a member of the Law\n Society of Kenya.\n\nFIRM PROFILE\n\nEWachira\n\nASSOCIATE.\n\n10\n\n\n--- PAGE 11 ---\n\n[Image 12]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nA. Muchemi Muthee & Co. Advocates stands as a reliable legal\n partner with a pragmatic approach to providing legally sound yet\n client oriented and cost effective solutions to all legal challenges\n\nFIRM PROFILE\n\n11\n\n\n--- PAGE 12 ---\n\nCONTACT\n US\n\n@info@muchemilaw.com\n\n+254 722 746 293\n +254 714 094 094\n\nwww.muchemilaw.com\n\nRoom T14,\n\nPremier...","snippetFromFront":"--- PAGE 1 ---\n\n[Image 1]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC.\n\nFIRM PROFILE\n\n\n--- PAGE 2 ---\n\nRes ipsa loquitur\n\nTHE THING SPEAKS FOR ITSELF.\n\nYou have a right to\n proper representation\n\n\n--- PAGE 3 ---\n\n[Image 2]\n\n[Image 3]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nFIRM PROFILE\n\nWe are a law firm that offers\n exceptional legal services.\n\nThe Firm seeks to offer\n professional, truthful and well-\n reasoned guidance to its clients\n with the only goal of ensuring\n expeditious, cost effective and\n client-based solutions.\n\n3\n\n\n--- PAGE 4 ---\n\n[Image 4]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nMission\n\nOur mission is to provide unwavering professional\n guidance, grounded in integrity and expertise.\n Drawing from our extensive experience, we are com-\n mitted to delivering expeditious, cost-effective, and\n client-centered solutions. We strive to be a trusted\n legal partner, dedicated to addressing the diverse\n needs of our clients with precision and reliability.\"\n\nVision\n\nTo be a leading force in the legal lands-\n cape, setting the standard for excellence\n\nand innovation. We envision a future\n where our firm is synonymous with legal\n expertise, known for our commitment to\n advancing client interests, and contribu-\n\nting positively to the legal profession\n and community. Through continuous\n growth and adaptation, we aim to be\n the go-to legal partner for those se..."}
+{"contentFetchId":"uploaded:image_3570dc.png-074dab5d-bd31-41ff-b5e7-771f5c8c75a3","fileMimeType":"image/png","fileName":"image_3570dc.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_357482.png-02525ec4-efd0-4b8a-87d3-276faddaf17a","fileMimeType":"image/png","fileName":"image_357482.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_357823.png-6a70f53d-362c-4477-a2e5-d4100a2cfb01","fileMimeType":"image/png","fileName":"image_357823.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_357c05.png-eb3d0800-3b03-40a5-8507-d349a8df8d01","fileMimeType":"image/png","fileName":"image_357c05.png","fileNameIsCodeAccessible":true}
+70" />
                             <span><a href="mailto:info@muchemilaw.com" className="hover:text-amber-500 transition-colors">info@muchemilaw.com</a></span>
                         </li>
                     </ul>
