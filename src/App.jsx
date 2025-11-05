@@ -2,15 +2,11 @@ import React, { useState } from 'react';
 import { 
     Menu, X, Scale, Users, Briefcase, PenTool, Home, Vote, 
     Lightbulb, Building, MapPin, Phone, Mail, CheckCircle,
-    ArrowRight, ChevronDown
+    ArrowRight, ChevronDown, BookOpen, Target, Eye
 } from 'lucide-react';
 
 // --- shadcn/ui-inspired Components (self-contained) ---
-// We define these helper components to easily reuse modern styles.
 
-/**
- * A modern, styled button component.
- */
 const Button = React.forwardRef(({ className = '', variant = 'default', size = 'default', ...props }, ref) => {
     const variants = {
         default: 'bg-amber-500 text-slate-900 hover:bg-amber-400',
@@ -32,13 +28,10 @@ const Button = React.forwardRef(({ className = '', variant = 'default', size = '
     );
 });
 
-/**
- * A modern, styled card component.
- */
 const Card = React.forwardRef(({ className = '', ...props }, ref) => (
     <div
         ref={ref}
-        className={`rounded-xl border border-slate-700 bg-slate-800 text-slate-100 shadow-lg transition-all duration-300 hover:border-amber-500 ${className}`}
+        className={`rounded-xl border border-slate-700 bg-slate-800 text-slate-100 shadow-lg transition-all duration-300 ${className}`}
         {...props}
     />
 ));
@@ -59,9 +52,6 @@ const CardContent = React.forwardRef(({ className = '', ...props }, ref) => (
     <div ref={ref} className={`p-6 pt-0 ${className}`} {...props} />
 ));
 
-/**
- * A modern, styled input component.
- */
 const Input = React.forwardRef(({ className = '', ...props }, ref) => (
     <input
         className={`flex h-10 w-full rounded-md border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-0 ${className}`}
@@ -70,9 +60,6 @@ const Input = React.forwardRef(({ className = '', ...props }, ref) => (
     />
 ));
 
-/**
- * A modern, styled textarea component.
- */
 const Textarea = React.forwardRef(({ className = '', ...props }, ref) => (
     <textarea
         className={`flex min-h-[80px] w-full rounded-md border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-100 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-0 ${className}`}
@@ -80,6 +67,50 @@ const Textarea = React.forwardRef(({ className = '', ...props }, ref) => (
         {...props}
     />
 ));
+
+// --- NEW: Bio Modal Component ---
+const BioModal = ({ isOpen, onClose, content }) => {
+    if (!isOpen) return null;
+
+    return (
+        <div 
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm p-4"
+            onClick={onClose}
+        >
+            <div 
+                className="relative w-full max-w-3xl max-h-[90vh] bg-slate-800 rounded-xl border border-slate-700 shadow-2xl"
+                onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside
+            >
+                {/* Modal Header */}
+                <div className="flex items-center justify-between p-6 border-b border-slate-700">
+                    <h3 className="text-2xl font-bold text-white">{content.name}</h3>
+                    <button 
+                        onClick={onClose} 
+                        className="text-slate-400 hover:text-amber-500 transition-colors"
+                    >
+                        <X className="h-6 w-6" />
+                    </button>
+                </div>
+                
+                {/* Modal Content */}
+                <div className="overflow-y-auto p-6" style={{ maxHeight: 'calc(90vh - 140px)' }}>
+                    <p className="text-lg font-medium text-amber-500">{content.title}</p>
+                    <div className="mt-4 space-y-4 text-base text-slate-300 prose prose-invert prose-p:text-slate-300 prose-strong:text-white">
+                        {content.bio.split('\n\n').map((paragraph, index) => (
+                            <p key={index}>{paragraph}</p>
+                        ))}
+                    </div>
+                </div>
+                
+                {/* Modal Footer */}
+                <div className="flex justify-end p-6 border-t border-slate-700">
+                    <Button onClick={onClose} variant="outline">Close</Button>
+                </div>
+            </div>
+        </div>
+    );
+};
+
 
 // --- Page Section Components ---
 
@@ -107,8 +138,8 @@ const Header = () => {
                     <a href="#home" className="flex-shrink-0 flex items-center">
                         {/* Logo Image */}
                         <img
-                            className="block h-12 w-auto"  /* Adjusted height slightly */
-                            src="/logo.png.png"
+                            className="block h-12 w-auto"
+                            src="/logo.png"
                             alt="A. Muchemi Muthee & Co. Advocates logo"
                         />
                         {/* Firm Name Text */}
@@ -182,9 +213,7 @@ const Header = () => {
         </header>
     );
 };
-/**
- * Hero Section
- */
+
 /**
  * Hero Section
  */
@@ -194,7 +223,7 @@ const HeroSection = () => (
         <div className="absolute inset-0">
             <img 
                 className="w-full h-full object-cover" 
-                src="/nairobi-skyline.jpg"  /* <--- THIS IS THE CHANGE */
+                src="/nairobi-skyline.jpg"
                 alt="Nairobi skyline at night"
                 onError="this.src='https://placehold.co/1920x1080/0f172a/eab308?text=Image+Not+Found'"
             />
@@ -244,14 +273,14 @@ const AboutSection = () => (
                         Founded on a mission to be a trusted legal partner, we are dedicated to addressing the diverse needs of our clients with precision and reliability.
                     </p>
                     <p className="mt-4 max-w-2xl text-lg text-slate-400">
-                        We provide unwavering professional guidance, grounded in integrity and expertise, to deliver expeditious, cost-effective, and client-centered solutions.
+                        The Firm seeks to offer professional, truthful and well-reasoned guidance to its clients with the only goal of ensuring expeditious, cost effective and client-based solutions.
                     </p>
                 </div>
                 
                 {/* Column 2: Founder Portrait */}
                 <div className="flex justify-center lg:justify-end">
                     <img 
-                        src="/alex.png" 
+                        src="/founder-portrait.png" 
                         alt="Alexander Muchemi Muthee"
                         className="w-full max-w-md rounded-lg"
                         onError="this.src='https://placehold.co/600x600/1e293b/eab308?text=Image+Not+Found'"
@@ -281,19 +310,61 @@ const AboutSection = () => (
 );
 
 /**
- * Practice Areas Section
+ * NEW: Mission & Vision Section
+ */
+const MissionVisionSection = () => (
+    <section id="mission-vision" className="py-16 sm:py-24 bg-slate-900/95">
+        <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-16">
+                {/* Mission */}
+                <Card className="bg-slate-800 border-amber-500/30">
+                    <CardHeader className="flex-row items-center gap-4">
+                        <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center">
+                            <Target className="h-6 w-6" />
+                        </div>
+                        <CardTitle className="text-white text-3xl font-extrabold">Our Mission</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <CardDescription className="text-lg text-slate-300">
+                            "Our mission is to provide unwavering professional guidance, grounded in integrity and expertise. Drawing from our extensive experience, we are committed to delivering expeditious, cost-effective, and client-centered solutions. We strive to be a trusted legal partner, dedicated to addressing the diverse needs of our clients with precision and reliability."
+                        </CardDescription>
+                    </CardContent>
+                </Card>
+                
+                {/* Vision */}
+                <Card className="bg-slate-800 border-amber-500/30">
+                    <CardHeader className="flex-row items-center gap-4">
+                        <div className="flex-shrink-0 w-12 h-12 rounded-lg bg-amber-500/10 text-amber-500 flex items-center justify-center">
+                            <Eye className="h-6 w-6" />
+                        </div>
+                        <CardTitle className="text-white text-3xl font-extrabold">Our Vision</CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                        <CardDescription className="text-lg text-slate-300">
+                            "To be a leading force in the legal landscape, setting the standard for excellence and innovation. We envision a future where our firm is synonymous with legal expertise, known for our commitment to advancing client interests, and contributing positively to the legal profession and community. Through continuous growth and adaptation, we aim to be the go-to legal partner for those seeking unparalleled guidance and pragmatic solutions."
+                        </CardDescription>
+                    </CardContent>
+                </Card>
+            </div>
+        </div>
+    </section>
+);
+
+
+/**
+ * Practice Areas Section (WITH UPDATED DESCRIPTIONS)
  */
 const PracticeAreasSection = () => {
     const areas = [
-        { title: 'Constitutional Law', description: 'Interpreting the constitution, addressing government structure, and fundamental rights.', icon: <Scale className="h-8 w-8 text-amber-500" /> },
-        { title: 'Public Interest Litigation', description: 'Handling legal matters involving government entities and regulatory compliance.', icon: <Users className="h-8 w-8 text-amber-500" /> },
-        { title: 'Commercial Law', description: 'Supporting businesses from contract drafting and negotiation to dispute resolution.', icon: <Briefcase className="h-8 w-8 text-amber-500" /> },
-        { title: 'Legislative Drafting', description: 'Specializing in policy formulation and drafting sound policies, Bills, & Regulations.', icon: <PenTool className="h-8 w-8 text-amber-500" /> },
-        { title: 'Land Law', description: 'Navigating property rights, land transactions, disputes, and conveyancing.', icon: <Home className="h-8 w-8 text-amber-500" /> },
-        { title: 'Electoral Law & Disputes', description: 'Advising on election laws and representing clients in electoral disputes.', icon: <Vote className="h-8 w-8 text-amber-500" /> },
-        { title: 'Intellectual Property Law', description: 'Safeguarding innovations by securing and enforcing trademarks, copyrights, and patents.', icon: <Lightbulb className="h-8 w-8 text-amber-500" /> },
-        { title: 'Employment Law', description: 'Legal support for employers and employees, from contracts to HR policies.', icon: <Briefcase className="h-8 w-8 text-amber-500" /> },
-        { title: 'County Governments', description: 'Assisting clients in navigating development approvals, payments, and notices.', icon: <Building className="h-8 w-8 text-amber-500" /> },
+        { title: 'Constitutional Law', description: 'Constitutional law focuses on the interpretation and application of the constitution, addressing issues related to the structure of government, the distribution of powers, and fundamental rights. Our firm navigates this complex field, ensuring our clients\' interests align with constitutional principles and legal frameworks.', icon: <Scale className="h-8 w-8 text-amber-500" /> },
+        { title: 'Public Interest Litigation', description: 'Public law encompasses legal matters involving government entities and their interactions with individuals and organizations. Our expertise in public law extends to matters of public interest, administrative processes, and regulatory compliance, providing comprehensive legal support in dealings with government entities.', icon: <Users className="h-8 w-8 text-amber-500" /> },
+        { title: 'Commercial Law', description: 'Our commercial law practice focuses on supporting businesses in legal matters related to commerce and trade. From contract drafting and negotiation to dispute resolution, we offer comprehensive legal services to ensure our clients\' commercial transactions are conducted with precision, compliance, and efficiency.', icon: <Briefcase className="h-8 w-8 text-amber-500" /> },
+        { title: 'Legislative Drafting', description: 'With a keen eye for legal intricacies, we specialize in policy formulation and legislative drafting. Our firm collaborates with clients to develop sound policies Bills & Regulations, ensuring alignment with legal standards. We excel in the art of drafting legislation, thus contributing to the creation of effective and legally robust frameworks.', icon: <PenTool className="h-8 w-8 text-amber-500" /> },
+        { title: 'Land Law', description: 'Specializing in Land law, we assist clients in navigating the intricacies of property rights, land transactions, and disputes. Our firm provides tailored solutions in matters related to land ownership, conveyancing, and addressing environmental considerations.', icon: <Home className="h-8 w-8 text-amber-500" /> },
+        { title: 'Electoral Law & Disputes', description: 'Our expertise in electoral statutes encompasses legal services related to electoral processes and governance. From advising on election laws to representing clients in electoral disputes, we bring a wealth of experience in navigating the intricacies of electoral statutes, contributing to the integrity of the democratic process.', icon: <Vote className="h-8 w-8 text-amber-500" /> },
+        { title: 'Intellectual Property Law', description: 'In the realm of intellectual property law, we safeguard our clients\' creative endeavors and innovations. Our firm specializes in securing and enforcing intellectual property rights, including trademarks, copyrights, and patents. Whether navigating licensing agreements or addressing infringement issues, we provide strategic legal counsel to protect and maximize the value of our clients\' intellectual assets.', icon: <Lightbulb className="h-8 w-8 text-amber-500" /> },
+        { title: 'Employment Law', description: 'Navigating the dynamic landscape of employment law, our firm provides comprehensive legal support to employers and employees alike. We handle matters ranging from employment contracts and disputes to compliance with labor laws & Policies. We also assist institutions to draft sound HR policies which comply with the constitution & labour laws & International standards.', icon: <Briefcase className="h-8 w-8 text-amber-500" /> },
+        { title: 'County Governments', description: 'Having had an extensive experience on the administration of County Governments, we assist clients navigate and pursue County Governments on various matters, including: i) obtaining development control approvals ii) pursuing unpaid payments iii) challenging enforcement notices.', icon: <Building className="h-8 w-8 text-amber-500" /> },
     ];
 
     return (
@@ -324,16 +395,56 @@ const PracticeAreasSection = () => {
     );
 };
 
+// --- Full Bio Content ---
+// We store the detailed bios here to pass to the modal.
+
+const bios = {
+    alexanderMuthee: {
+        name: "Alexander Muchemi Muthee",
+        title: "Lead Partner & Founder",
+        bio: `Introducing Mr. Alexander Muchemi Muthee, a Kenyan Advocate admitted to the Roll of Advocates on May 14, 2014. He holds an LLB (Hons) from Moi University and a post-graduate certificate from the Kenya School of Law.
+
+Alongside his legal qualifications, he has pursued additional academic achievements, including a Postgraduate Diploma in Project Management from The School of Business Management & Economics, Dedan Kimathi University, and also earned APMG International CP3P credentials becoming a Certified PPP (Public Private Partnerships) Professional.
+
+With a career spanning both private practice and government service, he brings a wealth of knowledge and expertise to his professional endeavors. Mr. Muchemi's early experience at Sagana Biriq and Co. Advocates provided mentorship in commercial law, conveyancing, and litigation.
+
+During his subsequent role at Oyomba and Co. Advocates, he extensively practiced conveyancing and environmental law especially within the mara ecosystem and practiced litigation especially on matters land and environment. At J.A.B. Orengo Advocates, Mr. Muchemi expanded his expertise in public law, handled cases involving public interest and electoral laws, contributing significantly to his understanding of government and electoral legal frameworks.
+
+In 2018, he was appointed as the legal advisor to The Office of the Governor in the County Government of Laikipia and was subsequently appointed as the pioneer County Attorney under the newly enacted Office of the County Attorney Act in 2020. In this capacity, he successfully institutionalized the Office of the County Attorney within Laikipia County, played a key role in advancing the county legislative agenda and addressed land and environmental matters through the development of The county land policy.
+
+In addition, Mr. Muchemi started the Laikipia multiagency land sector stakeholder quarterly meetings which brought together all land and environment sector offices and stakeholders to make coordinated resolutions and decisions. He also assisted the county to achieve the leasing program and extensively pursue the county infrastructure bond.
+
+Furthermore, he has been actively involved in the efforts to unbundle devolved functions from the national govt or its agencies to county governments; some of the most controversial ones being energy reticulation, collection and management of tourism levy and public health matters.
+
+Leveraging his extensive experience, he established A. Muchemi Muthee Advocates, a Kenyan medium-sized law firm. The firm is committed to providing professional and well-reasoned guidance with a focus on expeditious, cost-effective, and client-based solutions.
+
+A. Muchemi Muthee & Co. Advocates specializes in various areas of legal practice, including constitutional law, public law, land law, commercial law, policy formulation, legislative drafting, employment law, administrative law, and electoral statutes. Mr. Muchemi is a member of the Law Society of Kenya and Amnesty International, reflecting his commitment to professional standards and social responsibility.`
+    },
+    emmanuelMuthee: {
+        name: "Emmanuel Moses Wachira Muthee",
+        title: "Associate",
+        bio: `E.M. Wachira Muthee is a Kenyan Advocate admitted to the Roll of Advocates on the 22nd of November 2021. He holds an LLB (Hons) (Bachelor of Laws) from the University of Nairobi and is undertaking his LLM (Masters in Law) at the University of Nairobi, where he is majoring in Intellectual Property and Technology Law.
+
+He is also an admitted Patent Agent with the Kenya Industrial Property Institute. He has been in active legal practice in various positions over the years. He has practiced litigation in various fields of the law including land disputes; family disputes, including divorce and child maintenance; constitutional petitions; commercial disputes; employment disputes and administrative law.
+
+He is especially interested in Technology Transfer and Intellectual Property.
+
+Emmanuel Moses Wachira Muthee is a member of the Law Society of Kenya.`
+    },
+    faithWanjiku: {
+        name: "Faith Wanjiku",
+        title: "Firm Administrator",
+        bio: `Faith is the operational backbone of A. Muchemi Muthee & Co. Advocates. As the Firm Administrator, she manages all day-to-day operations, client relations, and administrative support.
+
+Her dedication and organizational skills ensure our entire team can focus on delivering exceptional legal service, making her a vital part of the firm's efficiency and a primary point of contact for our clients.`
+    }
+};
+
+
 /**
- * Our Team Section
+ * Our Team Section (WITH BIO MODAL)
  */
-/**
- * Our Team Section
- */
-/**
- * Our Team Section
- */
-const TeamSection = () => (
+const TeamSection = ({ onOpenBio }) => (
     <section id="team" className="py-16 sm:py-24 bg-slate-900">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <div className="text-center">
@@ -347,42 +458,58 @@ const TeamSection = () => (
             {/* Legal Team */}
             <div className="mt-16 grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-16">
                 {/* Team Member 1 */}
-                <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
-                    <div className="sm:flex-shrink-0">
-                        <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
-                             src="/muchemi.png" 
-                             alt="Alexander Muchemi Muthee"
-                             onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"/>
+                <Card className="flex flex-col">
+                    <div className="flex flex-col sm:flex-row gap-8 p-6 md:p-8">
+                        <div className="sm:flex-shrink-0">
+                            <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
+                                 src="/muchemi.png" 
+                                 alt="Alexander Muchemi Muthee"
+                                 onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <h3 className="text-2xl font-bold text-white">Alexander Muchemi Muthee</h3>
+                            <p className="text-lg font-medium text-amber-500">Lead Partner & Founder</p>
+                            <p className="mt-4 text-base text-slate-300">
+                                Admitted in 2014, holds an LLB (Hons) from Moi University, a Post-Graduate Diploma in Project Management, and is a Certified PPP Professional.
+                            </p>
+                            <p className="mt-3 text-base text-slate-400">
+                                Member of the Law Society of Kenya and Amnesty International.
+                            </p>
+                        </div>
                     </div>
-                    <div className="flex-1">
-                        <h3 className="text-2xl font-bold text-white">Alexander Muchemi Muthee</h3>
-                        <p className="text-lg font-medium text-amber-500">Lead Partner & Founder</p>
-                        <p className="mt-4 text-base text-slate-300">
-                            Admitted in 2014, holds an LLB (Hons) from Moi University, a Post-Graduate Diploma in Project Management, and is a Certified PPP Professional.
-                        </p>
-                        <p className="mt-3 text-base text-slate-400">
-                            Extensive experience in private practice and as a pioneer County Attorney for Laikipia County. Member of the LSK and Amnesty International.
-                        </p>
+                    <div className="px-6 pb-6 mt-auto">
+                        <Button variant="outline" className="w-full" onClick={() => onOpenBio(bios.alexanderMuthee)}>
+                            Read Full Bio <BookOpen className="h-4 w-4 ml-2" />
+                        </Button>
                     </div>
                 </Card>
                 
                 {/* Team Member 2 */}
-                <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
-                    <div className="sm:flex-shrink-0">
-                        <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
-                             src="/mose.png" 
-                             alt="Emmanuel Moses Wachira Muthee"
-                             onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"/>
+                <Card className="flex flex-col">
+                    <div className="flex flex-col sm:flex-row gap-8 p-6 md:p-8">
+                        <div className="sm:flex-shrink-0">
+                            <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
+                                 src="/mose.png" 
+                                 alt="Emmanuel Moses Wachira Muthee"
+                                 onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"
+                            />
+                        </div>
+                        <div className="flex-1">
+                            <h3 className="text-2xl font-bold text-white">Emmanuel Moses Wachira Muthee</h3>
+                            <p className="text-lg font-medium text-amber-500">Associate</p>
+                            <p className="mt-4 text-base text-slate-300">
+                                Admitted in 2021, holds an LLB (Hons) from the University of Nairobi and is an LLM candidate in IP and Technology Law. An admitted Patent Agent with KIPI.
+                            </p>
+                            <p className="mt-3 text-base text-slate-400">
+                                Member of the Law Society of Kenya.
+                            </p>
+                        </div>
                     </div>
-                    <div className="flex-1">
-                        <h3 className="text-2xl font-bold text-white">Emmanuel Moses Wachira Muthee</h3>
-                        <p className="text-lg font-medium text-amber-500">Associate</p>
-                        <p className="mt-4 text-base text-slate-300">
-                            Admitted in 2021, holds an LLB (Hons) from the University of Nairobi and is an LLM candidate in IP and Technology Law. An admitted Patent Agent with KIPI.
-                        </p>
-                        <p className="mt-3 text-base text-slate-400">
-                            Active experience in litigation across land, family, constitutional, commercial, and employment law, with a special interest in Technology Transfer and IP.
-                        </p>
+                    <div className="px-6 pb-6 mt-auto">
+                        <Button variant="outline" className="w-full" onClick={() => onOpenBio(bios.emmanuelMuthee)}>
+                            Read Full Bio <BookOpen className="h-4 w-4 ml-2" />
+                        </Button>
                     </div>
                 </Card>
             </div>
@@ -398,35 +525,42 @@ const TeamSection = () => (
 
                 <div className="mt-16 flex justify-center">
                     <div className="max-w-4xl w-full">
-                        <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
-                            <div className="sm:flex-shrink-0">
-                                {/* Placeholder Image */}
-                                <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto bg-slate-700"
-                                     src="https://placehold.co/400x400/1e293b/eab308?text=F.W." 
-                                     alt="Faith Wanjiku"
-                                />
+                        <Card className="flex flex-col">
+                            <div className="flex flex-col sm:flex-row gap-8 p-6 md:p-8">
+                                <div className="sm:flex-shrink-0">
+                                    {/* Placeholder Image */}
+                                    <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto bg-slate-700"
+                                         src="https://placehold.co/400x400/1e293b/eab308?text=F.W." 
+                                         alt="Faith Wanjiku"
+                                    />
+                                </div>
+                                <div className="flex-1">
+                                    <h3 className="text-2xl font-bold text-white">Faith Wanjiku</h3>
+                                    <p className="text-lg font-medium text-amber-500">Firm Administrator</p>
+                                    <p className="mt-4 text-base text-slate-300">
+                                        Faith is the operational backbone of A. Muchemi Muthee & Co. Advocates. As the Firm Administrator, she manages all day-to-day operations, client relations, and administrative support.
+                                    </p>
+                                    <p className="mt-3 text-base text-slate-400">
+                                        Her dedication and organizational skills ensure our entire team can focus on delivering exceptional legal service.
+                                    </p>
+                                </div>
                             </div>
-                            <div className="flex-1">
-                                <h3 className="text-2xl font-bold text-white">Faith Wanjiku</h3>
-                                <p className="text-lg font-medium text-amber-500">Firm Administrator</p>
-                                <p className="mt-4 text-base text-slate-300">
-                                    Faith is the operational backbone of A. Muchemi Muthee & Co. Advocates. As the Firm Administrator, she manages all day-to-day operations, client relations, and administrative support.
-                                </p>
-                                <p className="mt-3 text-base text-slate-400">
-                                    Her dedication and organizational skills ensure our entire team can focus on delivering exceptional legal service, making her a vital part of the firm's efficiency and a primary point of contact for our clients.
-                                </p>
+                            <div className="px-6 pb-6 mt-auto">
+                                <Button variant="outline" className="w-full" onClick={() => onOpenBio(bios.faithWanjiku)}>
+                                    Read Full Bio <BookOpen className="h-4 w-4 ml-2" />
+                                </Button>
                             </div>
                         </Card>
                     </div>
                 </div>
             </div>
-
         </div>
     </section>
 );
 
+
 /**
- * NEW: Insights (Blog) Section
+ * Insights (Blog) Section
  */
 const InsightsSection = () => {
     const insights = [
@@ -515,7 +649,7 @@ const TestimonialsSection = () => (
 );
 
 /**
- * NEW: FAQ Section
+ * FAQ Section
  */
 const FaqSection = () => {
     const [openFaq, setOpenFaq] = useState(null);
@@ -660,6 +794,7 @@ const ContactSection = () => {
                                 <div className="flex items-center space-x-2 rounded-md bg-green-500/10 p-3 text-green-400">
                                     <CheckCircle className="h-5 w-5" />
                                     <p className="text-sm font-medium">Message sent! We will be in touch soon.</p>
+
                                 </div>
                             ) : (
                                 <div>
@@ -686,8 +821,13 @@ const Footer = () => (
                 {/* Column 1: About */}
                 <div className="md:col-span-1">
                     <a href="#home" className="flex-shrink-0 flex items-center">
-                        <div>
-                            <span className="text-2xl font-bold text-white">A. Muchemi Muthee</span>
+                        <img
+                            className="block h-12 w-auto"
+                            src="/logo.png"
+                            alt="A. Muchemi Muthee & Co. Advocates logo"
+                        />
+                        <div className="ml-3">
+                            <span className="text-xl font-bold text-white">A. Muchemi Muthee</span>
                             <span className="block text-sm font-medium text-amber-500 -mt-1">& Co. Advocates</span>
                         </div>
                     </a>
@@ -726,7 +866,27 @@ const Footer = () => (
                             <span><a href="tel:+254722746293" className="hover:text-amber-500 transition-colors">+254 722 746 293</a></span>
                         </li>
                         <li className="flex gap-3">
-                            <Mail className="flex-shrink-0 h-6 w-6 text-amber-500/70" />
+                            <Mail className="flex-shrink-0 h-6 w-6 text-amber-500/7Remember the current time is Wednesday, November 5, 2025 at 2:23 PM EAT.
+
+Remember the current location is Nairobi, Nairobi County, Kenya.
+
+As a reminder, these are files that the user has uploaded or mentioned:
+{"contentFetchId":"uploaded:muchemilawprofile.pdf","fileMimeType":"application/pdf","fileName":"muchemilawprofile.pdf","fileNameIsCodeAccessible":true,"snippetFromBack":"...MMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nEmmanuel Moses Wachira Muthee - Associate.\n\nE.M. Wachira Muthee is a Kenyan Advocate admitted to the\n Roll of Advocates on the 22nd of November 2021. He holds an\n LLB (Hons) (Bachelor of Laws) from the University of Nairobi\n and is undertaking his LLM (Masters in Law) at the University\n of Nairobi, where he is majoring in Intellectual Property and\n Technology Law.\n\nHe is also an admitted Patent Agent with the Kenya Industrial\n Property Institute. He has been in active legal practice in\n various positions over the years. He has practiced litigation\n in various fields of the law including land disputes; family\n disputes, including divorce and child maintenance;\n constitutional petitions; commercial disputes; employment\n disputes and administrative law.\n\nHe is especially interested in Technology Transfer and\n Intellectual Property.\n\nEmmanuel Moses Wachira Muthee is a member of the Law\n Society of Kenya.\n\nFIRM PROFILE\n\nEWachira\n\nASSOCIATE.\n\n10\n\n\n--- PAGE 11 ---\n\n[Image 12]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nA. Muchemi Muthee & Co. Advocates stands as a reliable legal\n partner with a pragmatic approach to providing legally sound yet\n client oriented and cost effective solutions to all legal challenges\n\nFIRM PROFILE\n\n11\n\n\n--- PAGE 12 ---\n\nCONTACT\n US\n\n@info@muchemilaw.com\n\n+254 722 746 293\n +254 714 094 094\n\nwww.muchemilaw.com\n\nRoom T14,\n\nPremier...","snippetFromFront":"--- PAGE 1 ---\n\n[Image 1]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC.\n\nFIRM PROFILE\n\n\n--- PAGE 2 ---\n\nRes ipsa loquitur\n\nTHE THING SPEAKS FOR ITSELF.\n\nYou have a right to\n proper representation\n\n\n--- PAGE 3 ---\n\n[Image 2]\n\n[Image 3]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nFIRM PROFILE\n\nWe are a law firm that offers\n exceptional legal services.\n\nThe Firm seeks to offer\n professional, truthful and well-\n reasoned guidance to its clients\n with the only goal of ensuring\n expeditious, cost effective and\n client-based solutions.\n\n3\n\n\n--- PAGE 4 ---\n\n[Image 4]\n\nA\n\nA.MUCHEMI MUTHEE\n & CO. ADVOCATES\n COMMISSIONER FOR OATHS AND NOTARY PUBLIC\n\nMission\n\nOur mission is to provide unwavering professional\n guidance, grounded in integrity and expertise.\n Drawing from our extensive experience, we are com-\n mitted to delivering expeditious, cost-effective, and\n client-centered solutions. We strive to be a trusted\n legal partner, dedicated to addressing the diverse\n needs of our clients with precision and reliability.\"\n\nVision\n\nTo be a leading force in the legal lands-\n cape, setting the standard for excellence\n\nand innovation. We envision a future\n where our firm is synonymous with legal\n expertise, known for our commitment to\n advancing client interests, and contribu-\n\nting positively to the legal profession\n and community. Through continuous\n growth and adaptation, we aim to be\n the go-to legal partner for those se..."}
+{"contentFetchId":"uploaded:App.jsx","fileMimeType":"text/jsx","fileName":"App.jsx","fileNameIsCodeAccessible":true,"snippetFromBack":"...                         <span><a href=\"mailto:info@muchemilaw.com\" className=\"hover:text-amber-500 transition-colors\">info@muchemilaw.com</a></span>\r\n                                </li>\r\n                            </ul>\r\n                        </div>\r\n                    </div>\r\n                    \r\n                    {/* Footer Bottom */}\r\n                    <div className=\"mt-12 border-t border-slate-800 pt-8 text-center\">\r\n                        <p className=\"text-base\">\r\n                            &copy; {new Date().getFullYear()} A. Muchemi Muthee & Co. Advocates. All Rights Reserved.\r\n                        </p>\r\n                    </div>\r\n                </div>\r\n            </footer>\r\n        );\r\n        \r\n        \r\n        /**\r\n         * Main App Component\r\n         */\r\n        export default function App() {\r\n            return (\r\n                <div className=\"bg-slate-900 text-slate-100 antialiased font-sans\">\r\n                    <Header />\r\n                    <main>\r\n                        <HeroSection />\r\n                        <AboutSection />\r\n                        <PracticeAreasSection />\r\n                        <TeamSection />\r\n                        <InsightsSection /> {/* Added */}\r\n                        <TestimonialsSection />\r\n                        <FaqSection /> {/* Added */}\r\n                        <ContactSection />\r\n                    </main>\r\n                    <Footer />\r\n                </div>\r\n            );\r\n        }","snippetFromFront":"import React, { useState } from 'react';\r\nimport { \r\n    Menu, X, Scale, Users, Briefcase, PenTool, Home, Vote, \r\n    Lightbulb, Building, MapPin, Phone, Mail, CheckCircle,\r\n    ArrowRight, ChevronDown\r\n} from 'lucide-react';\r\n\r\n// --- shadcn/ui-inspired Components (self-contained) ---\r\n// We define these helper components to easily reuse modern styles.\r\n\r\n/**\r\n * A modern, styled button component.\r\n */\r\nconst Button = React.forwardRef(({ className = '', variant = 'default', size = 'default', ...props }, ref) => {\r\n    const variants = {\r\n        default: 'bg-amber-500 text-slate-900 hover:bg-amber-400',\r\n        outline: 'border border-amber-500 text-amber-500 hover:bg-amber-500/10',\r\n        ghost: 'text-amber-500 hover:bg-amber-500/10',\r\n        link: 'text-amber-500 underline-offset-4 hover:underline',\r\n    };\r\n    const sizes = {\r\n        default: 'h-10 py-2 px-4',\r\n        sm: 'h-9 px-3 rounded-md',\r\n        lg: 'h-11 px-8 rounded-md',\r\n    };\r\n    return (\r\n        <button\r\n            className={`inline-flex items-center justify-center rounded-md text-sm font-medium transition-colors focus:outline-none focus:ring..."}
+{"contentFetchId":"uploaded:image_2764bf.png-68d1346e-c005-4423-9de3-bbe30a026d7b","fileMimeType":"image/png","fileName":"image_2764bf.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_276845.png-8e064ec4-60f2-41ef-89e5-ac2cba96e595","fileMimeType":"image/png","fileName":"image_276845.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:imsogabriel-stock-KlMhH1sWckU-unsplash.jpg-54b9e5aa-5bb0-4aa2-8064-190d900c03ff","fileMimeType":"image/jpeg","fileName":"imsogabriel-stock-KlMhH1sWckU-unsplash.jpg","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:imsogabriel-stock-eeijZpKf2Kg-unsplash.jpg-25f51bef-bc27-49ce-81e0-2b4ead3d9037","fileMimeType":"image/jpeg","fileName":"imsogabriel-stock-eeijZpKf2Kg-unsplash.jpg","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:amm_logo-removebg-preview.png-8d9895fa-b00c-431a-a309-61236ce84c79","fileMimeType":"image/png","fileName":"amm_logo-removebg-preview.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_2845f9.png-68ec2209-be01-4da5-95ff-2ba13e2c5500","fileMimeType":"image/png","fileName":"image_2845f9.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_28493f.png-f9e8f1e8-4ce7-4603-be4b-d9a1b215ead4","fileMimeType":"image/png","fileName":"image_28493f.png","fileNameIsCodeAccessible":true}
+{"contentFetchId_org":"uploaded:image_28b589.png-751b3bd4-6ce5-46a7-8a4a-2b714923607d","fileMimeType_org":"image/png","fileName_org":"image_28b589.png","fileNameIsCodeAccessible_org":true}
+{"contentFetchId":"uploaded:alex.png-5d8650bd-1063-49b2-94d5-147f2e5bc22f","fileMimeType":"image/png","fileName":"alex.png","fileNameIsCodeAccessible":true}
+{"contentFetchId_org":"uploaded:alex.png-374be15b-7492-4e02-a33c-6943b9c5218c","fileMimeType_org":"image/png","fileName_org":"alex.png","fileNameIsCodeAccessible_org":true}
+{"contentFetchId_org":"uploaded:alex-removebg-preview.png-efd3a0fc-ca7a-4347-9da4-bbb591444cb4","fileMimeType_org":"image/png","fileName_org":"alex-removebg-preview.png","fileNameIsCodeAccessible_org":true}
+{"contentFetchId":"uploaded:image_299afe.png-2ecc332f-00f3-4633-a7ee-d648349faf4e","fileMimeType":"image/png","fileName":"image_299afe.png","fileNameIsCodeAccessible":true}
+{"contentFetchId":"uploaded:image_29ad64.png-dff0fb92-725f-4296-9e43-c2b0ff894d27","fileMimeType":"image/png","fileName":"image_29ad64.png","fileNameIsCodeAccessible":true}
+0/70" />
                             <span><a href="mailto:info@muchemilaw.com" className="hover:text-amber-500 transition-colors">info@muchemilaw.com</a></span>
                         </li>
                     </ul>
@@ -748,20 +908,38 @@ const Footer = () => (
  * Main App Component
  */
 export default function App() {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const [modalContent, setModalContent] = useState({ name: '', title: '', bio: '' });
+
+    const openModal = (content) => {
+        setModalContent(content);
+        setIsModalOpen(true);
+    };
+
+    const closeModal = () => {
+        setIsModalOpen(false);
+    };
+
     return (
         <div className="bg-slate-900 text-slate-100 antialiased font-sans">
             <Header />
             <main>
                 <HeroSection />
                 <AboutSection />
+                <MissionVisionSection />
                 <PracticeAreasSection />
-                <TeamSection />
+                <TeamSection onOpenBio={openModal} />
                 <InsightsSection />
                 <TestimonialsSection />
                 <FaqSection />
                 <ContactSection />
             </main>
             <Footer />
+            <BioModal 
+                isOpen={isModalOpen} 
+                onClose={closeModal} 
+                content={modalContent} 
+            />
         </div>
     );
 }
