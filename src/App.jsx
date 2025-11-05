@@ -324,7 +324,7 @@ const TeamSection = () => (
                 <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
                     <div className="sm:flex-shrink-0">
                         <img className="h-48 w-48 rounded-lg object-cover shadow-lg mx-auto" 
-                             src="/alex.png" 
+                             src="/muchemi.png" 
                              alt="Alexander Muchemi Muthee"
                              onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"/>
                     </div>
