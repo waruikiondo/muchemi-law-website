@@ -94,8 +94,8 @@ const Header = () => {
         { name: 'About Us', href: '#about' },
         { name: 'Practice Areas', href: '#practice-areas' },
         { name: 'Our Team', href: '#team' },
-        { name: 'Insights', href: '#insights' }, // Added
-        { name: 'FAQ', href: '#faq' }, // Added
+        { name: 'Insights', href: '#insights' },
+        { name: 'FAQ', href: '#faq' },
         { name: 'Contact', href: '#contact' },
     ];
 
@@ -104,14 +104,19 @@ const Header = () => {
             <nav className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-20">
                     {/* Logo / Firm Name */}
-                   {/* Logo / Firm Name */}
-<a href="#home" className="flex-shrink-0 flex items-center">
-    <img
-        className="block h-14 w-auto"  /* You can adjust h-14 (3.5rem) if it's too big or small */
-        src="/logo.png.png"
-        alt="A. Muchemi Muthee & Co. Advocates logo"
-    />
-</a>
+                    <a href="#home" className="flex-shrink-0 flex items-center">
+                        {/* Logo Image */}
+                        <img
+                            className="block h-12 w-auto"  /* Adjusted height slightly */
+                            src="/logo.png.png"
+                            alt="A. Muchemi Muthee & Co. Advocates logo"
+                        />
+                        {/* Firm Name Text */}
+                        <div className="ml-3">
+                            <span className="text-xl font-bold text-white">A. Muchemi Muthee</span>
+                            <span className="block text-sm font-medium text-amber-500 -mt-1">& Co. Advocates</span>
+                        </div>
+                    </a>
                     
                     {/* Desktop Navigation */}
                     <div className="hidden md:flex md:items-center md:space-x-8">
@@ -177,7 +182,6 @@ const Header = () => {
         </header>
     );
 };
-
 /**
  * Hero Section
  */
