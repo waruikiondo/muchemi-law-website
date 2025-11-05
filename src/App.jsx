@@ -345,7 +345,8 @@ const TeamSection = () => (
                 {/* Team Member 1 */}
                 <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
                     <div className="sm:flex-shrink-0">
-                        <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"  /* <--- THIS IS THE FIX */
+                        {/* THIS IS THE FIX: object-contain */}
+                        <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
                              src="/muchemi.png" 
                              alt="Alexander Muchemi Muthee"
                              onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"/>
@@ -358,14 +359,15 @@ const TeamSection = () => (
                         </p>
                         <p className="mt-3 text-base text-slate-400">
                             Extensive experience in private practice and as a pioneer County Attorney for Laikipia County. Member of the LSK and Amnesty International.
-                        </t>
+                        </p> {/* <--- THIS IS THE TYPO FIX */}
                     </div>
                 </Card>
                 
                 {/* Team Member 2 */}
                 <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
                     <div className="sm:flex-shrink-0">
-                        <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"  /* <--- THIS IS THE FIX */
+                        {/* THIS IS THE FIX: object-contain */}
+                        <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"
                              src="/mose.png" 
                              alt="Emmanuel Moses Wachira Muthee"
                              onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"/>
