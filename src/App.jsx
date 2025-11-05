@@ -327,6 +327,9 @@ const PracticeAreasSection = () => {
 /**
  * Our Team Section
  */
+/**
+ * Our Team Section
+ */
 const TeamSection = () => (
     <section id="team" className="py-16 sm:py-24 bg-slate-900">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -342,7 +345,7 @@ const TeamSection = () => (
                 {/* Team Member 1 */}
                 <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
                     <div className="sm:flex-shrink-0">
-                        <img className="h-48 w-48 rounded-lg object-cover shadow-lg mx-auto" 
+                        <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"  /* <--- THIS IS THE FIX */
                              src="/muchemi.png" 
                              alt="Alexander Muchemi Muthee"
                              onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"/>
@@ -355,14 +358,14 @@ const TeamSection = () => (
                         </p>
                         <p className="mt-3 text-base text-slate-400">
                             Extensive experience in private practice and as a pioneer County Attorney for Laikipia County. Member of the LSK and Amnesty International.
-                        </p>
+                        </t>
                     </div>
                 </Card>
                 
                 {/* Team Member 2 */}
                 <Card className="flex flex-col sm:flex-row gap-8 p-6 md:p-8 bg-slate-800 border-slate-700 hover:border-amber-500">
                     <div className="sm:flex-shrink-0">
-                        <img className="h-48 w-48 rounded-lg object-cover shadow-lg mx-auto" 
+                        <img className="h-48 w-48 rounded-lg object-contain shadow-lg mx-auto"  /* <--- THIS IS THE FIX */
                              src="/mose.png" 
                              alt="Emmanuel Moses Wachira Muthee"
                              onError="this.src='https://placehold.co/400x400/1e293b/eab308?text=Image+Not+Found'"/>
