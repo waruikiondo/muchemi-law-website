@@ -233,20 +233,39 @@ const HeroSection = () => (
 const AboutSection = () => (
     <section id="about" className="py-16 sm:py-24 bg-slate-900 text-slate-100">
         <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="text-center">
-                <h2 className="text-base font-semibold text-amber-500 tracking-wide uppercase">Our Firm</h2>
-                <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Our Commitment to You</p>
-                <p className="mt-4 max-w-2xl mx-auto text-xl text-slate-300">
-                    Founded on a mission to be a trusted legal partner, we are dedicated to addressing the diverse needs of our clients with precision and reliability.
-                </p>
+            
+            {/* Updated 2-column layout for text and photo */}
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+                {/* Column 1: Text Content */}
+                <div className="text-left">
+                    <h2 className="text-base font-semibold text-amber-500 tracking-wide uppercase">Our Firm</h2>
+                    <p className="mt-2 text-3xl sm:text-4xl font-extrabold text-white tracking-tight">Our Commitment to You</p>
+                    <p className="mt-4 max-w-2xl text-xl text-slate-300">
+                        Founded on a mission to be a trusted legal partner, we are dedicated to addressing the diverse needs of our clients with precision and reliability.
+                    </p>
+                    <p className="mt-4 max-w-2xl text-lg text-slate-400">
+                        We provide unwavering professional guidance, grounded in integrity and expertise, to deliver expeditious, cost-effective, and client-centered solutions.
+                    </p>
+                </div>
+                
+                {/* Column 2: Founder Portrait */}
+                <div className="flex justify-center lg:justify-end">
+                    <img 
+                        src="/founder-portrait.png" 
+                        alt="Alexander Muchemi Muthee"
+                        className="w-full max-w-md rounded-lg"
+                        onError="this.src='https://placehold.co/600x600/1e293b/eab308?text=Image+Not+Found'"
+                    />
+                </div>
             </div>
 
-            <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+            {/* Values Section (with adjusted top margin) */}
+            <div className="mt-24 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
                 {[
-                    { title: 'Integrity', description: 'Upholding the highest ethical standards, ensuring transparency, honesty, and fairness in all our dealings.', icon: <CheckCircle className="h-6 w-6" /> },
-                    { title: 'Client-Centric', description: 'Our clients\' needs are at the core of our decision-making, prioritizing and meeting their unique requirements.', icon: <Users className="h-6 w-6" /> },
-                    { title: 'Collaboration', description: 'Believing in the power of collaboration, working seamlessly with our clients to achieve shared goals.', icon: <Briefcase className="h-6 w-6" /> },
-                    { title: 'Professionalism', description: 'Maintaining a high level of professionalism in all interactions, ensuring respect, courtesy, and diligence.', icon: <Scale className="h-6 w-6" /> }
+                    { title: 'Integrity', description: 'Upholding the highest ethical standards, ensuring transparency, honesty, and fairness.', icon: <CheckCircle className="h-6 w-6" /> },
+                    { title: 'Client-Centric', description: 'Our clients\' needs are at the core of our decision-making and requirements.', icon: <Users className="h-6 w-6" /> },
+                    { title: 'Collaboration', description: 'Working seamlessly with our clients to achieve shared goals and success.', icon: <Briefcase className="h-6 w-6" /> },
+                    { title: 'Professionalism', description: 'Maintaining a high level of professionalism in all interactions and diligence.', icon: <Scale className="h-6 w-6" /> }
                 ].map((item) => (
                     <div key={item.title} className="text-center">
                         <div className="flex items-center justify-center h-12 w-12 rounded-md bg-amber-500/10 text-amber-500 mx-auto">
