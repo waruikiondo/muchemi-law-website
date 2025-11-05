@@ -179,16 +179,20 @@ const Header = () => {
 /**
  * Hero Section
  */
+/**
+ * Hero Section
+ */
 const HeroSection = () => (
     <section id="home" className="relative bg-slate-900 overflow-hidden h-[90vh] min-h-[600px] flex items-center">
-        {/* Background Image Placeholder (Nairobi Skyline) */}
+        {/* Background Image */}
         <div className="absolute inset-0">
             <img 
                 className="w-full h-full object-cover" 
-                src="https://placehold.co/1920x1080/0f172a/eab308?text=Nairobi+Skyline+at+Night" 
+                src="/nairobi-skyline.jpg"  /* <--- THIS IS THE CHANGE */
                 alt="Nairobi skyline at night"
                 onError="this.src='https://placehold.co/1920x1080/0f172a/eab308?text=Image+Not+Found'"
             />
+            {/* This is the dark overlay to make text readable */}
             <div className="absolute inset-0 bg-slate-900/70 backdrop-blur-sm"></div>
         </div>
         
